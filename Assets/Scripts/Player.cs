@@ -14,14 +14,32 @@ public class Player : NetworkBehaviour
     private Camera playerCamera;
     private GameObject playerBody;
 
-    private void Start()
+
+    private void NetworkInit()
     {
         playerCamera = transform.Find("Camera").GetComponent<Camera>();
         playerCamera.enabled = IsOwner;
         playerCamera.GetComponent<AudioListener>().enabled = IsOwner;
 
-        playerBody = transform.Find("Body").gameObject;
-        ApplyColor();
+        ApplyPlayerColor();
+        playerColorNetVar.OnValueChanged += OnPlayerColorChanged;
+    }
+
+    private void Awake()
+    {
+        NetworkHelper.Log(this, "Awake");
+    }
+
+    private void Start()
+    {
+        NetworkHelper.Log(this, "Start");
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        NetworkHelper.Log(this, "OnNetworkSpawn");
+        NetworkInit();
+        base.OnNetworkSpawn();
     }
 
     private void Update()
@@ -32,6 +50,12 @@ public class Player : NetworkBehaviour
         }
         
     }
+
+    public void OnPlayerColorChanged(Color previous, Color current)
+    {
+        ApplyPlayerColor();
+    }
+
     private void OwnerHandleInput()
     {
         Vector3 movement = CalcMovement();
@@ -43,8 +67,9 @@ public class Player : NetworkBehaviour
         }
     }
 
-    public void ApplyColor()
+    public void ApplyPlayerColor()
     {
+        NetworkHelper.Log(this, $"Applying color {playerColorNetVar.Value}");
         playerBody.GetComponent<MeshRenderer>().material.color = playerColorNetVar.Value;
     }
 
