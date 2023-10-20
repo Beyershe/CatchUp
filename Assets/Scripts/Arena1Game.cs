@@ -12,10 +12,10 @@ public class Arena1Game : NetworkBehaviour
     private int positionIndex = 0;
     private Vector3[] startPositions = new Vector3[]
     {
-        new Vector3(2, 2, 0),
-        new Vector3(-2, 2, 0),
-        new Vector3(0, 2, 2),
-        new Vector3(0, 2, -2)
+        new Vector3(15, 2, 0),
+        new Vector3(-15, 2, 0),
+        new Vector3(0, 2, 15),
+        new Vector3(0, 2, -15)
     };
 
     private int colorIndex = 0;
