@@ -6,7 +6,7 @@ public class PowerUpChangeColor : BasePowerUp
 {
     protected override bool ApplyToPlayer(Player thePickerUpper)
     {
-        thePickerUpper.PlayerColor.Value = Color.black;
+        thePickerUpper.PlayerColor.Value = Color.magenta;
         return true;
     }
 

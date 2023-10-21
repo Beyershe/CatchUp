@@ -133,7 +133,7 @@ PrefabInstance:
     - target: {fileID: 1090906159072333277, guid: 9bfac1dc833668749848e30e7560e649, type: 3}
       propertyPath: powerUp
       value: 
-      objectReference: {fileID: 4316456261358167342, guid: d993e44b1fe887c4387c477b070b5fef, type: 3}
+      objectReference: {fileID: -8033841372388730256, guid: c428294be5807c449a706976038b8b1f, type: 3}
     - target: {fileID: 1098178385916805274, guid: 9bfac1dc833668749848e30e7560e649, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1873202121
