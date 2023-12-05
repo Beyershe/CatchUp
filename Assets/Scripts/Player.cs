@@ -86,7 +86,7 @@ public class Player : NetworkBehaviour
         {
             Debug.Log("Player Damage " + other.GetComponent<NetworkObject>().OwnerClientId);
 
-            //NetworkManager.Singleton.ConnectedClients[other.GetComponent<NetworkObject>().OwnerClientId].PlayerObject.GetComponent<NetworkPlayerData>().score.Value += 1;
+            NetworkManager.Singleton.ConnectedClients[other.GetComponent<NetworkObject>().OwnerClientId].PlayerObject.GetComponent<NetwrokPlayerData>().score.Value += 1;
             playerHP.Value -= 10;
         }
         else if(other.GetComponent<HealthPickup>())
