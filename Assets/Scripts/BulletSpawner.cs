@@ -5,36 +5,25 @@ using Unity.Netcode;
 
 public class BulletSpawner : NetworkBehaviour
 {
-    public Rigidbody BulletPrefab;
-    private float bulletSpeed = 80f;
-
-    public float timeBetweenBullets = .5f;
-    private float shotCountDown = 0f;
+    [SerializeField]
+    private GameObject bullet;
+    [SerializeField]
+    private GameObject bulletSpawnLoc;
 
     private void Update()
     {
-        if(IsServer)
+        if(Input.GetKeyDown(KeyCode.Mouse0) && IsOwner)
         {
-            if(shotCountDown > 0)
-            {
-                shotCountDown -= Time.deltaTime;
-            }
+            SpawnBulletServerRPC(bulletSpawnLoc.transform.position, bulletSpawnLoc.transform.rotation, GetComponent<NetworkObject>().OwnerClientId);
         }
     }
 
     [ServerRpc]
-    public void FireServerRPC(ServerRpcParams rpcParams = default)
+    public void SpawnBulletServerRPC(Vector3 pos, Quaternion rot, ulong ownerID)
     {
-        if(shotCountDown > 0)
-        {
-            return;
-        }
-
-        Rigidbody newBullet = Instantiate(BulletPrefab, transform.position, transform.rotation);
-        newBullet.velocity = transform.forward * bulletSpeed;
-        newBullet.gameObject.GetComponent<NetworkObject>().SpawnWithOwnership(rpcParams.Receive.SenderClientId);
-        Destroy(newBullet.gameObject, 3);
-
-        shotCountDown = timeBetweenBullets;
+        GameObject tempBullet = Instantiate(bullet, pos, rot);
+        tempBullet.GetComponent<NetworkObject>().SpawnWithOwnership(ownerID);
+        Destroy(tempBullet, 3);
     }
+
 }

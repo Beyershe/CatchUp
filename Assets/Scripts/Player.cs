@@ -13,6 +13,7 @@ public class Player : NetworkBehaviour
     public NetworkVariable<Color> PlayerColor = new NetworkVariable<Color>(Color.red);
     public BulletSpawner bulletSpawner;
     public NetworkVariable<int> ScoreNetVar = new NetworkVariable<int>(0);
+    public NetworkVariable<int> playerHP = new NetworkVariable<int>();
 
     private Camera playerCamera;
     public GameObject playerBody;
@@ -48,6 +49,7 @@ public class Player : NetworkBehaviour
         NetworkHelper.Log(this, "OnNetworkSpawn");
         NetworkInit();
         base.OnNetworkSpawn();
+        playerHP.Value = 100;
     }
 
     private void ClientOnScoreValueChanged(int old, int current)
@@ -75,6 +77,23 @@ public class Player : NetworkBehaviour
                 other.GetComponent<BasePowerUp>().ServerPickUp(this);
             }
         }
+
+        if(!IsServer)
+        {
+            return;
+        }
+        if(other.GetComponent<BulletScript>())
+        {
+            Debug.Log("Player Damage " + other.GetComponent<NetworkObject>().OwnerClientId);
+
+            //NetworkManager.Singleton.ConnectedClients[other.GetComponent<NetworkObject>().OwnerClientId].PlayerObject.GetComponent<NetworkPlayerData>().score.Value += 1;
+            playerHP.Value -= 10;
+        }
+        else if(other.GetComponent<HealthPickup>())
+        {
+            Debug.Log("Player HP+");
+            playerHP.Value += 50;
+        }
     }
 
     private void ServerHandleCollision(Collision collision)
@@ -100,7 +119,6 @@ public class Player : NetworkBehaviour
             if (Input.GetButtonDown("Fire1"))
             {
                 NetworkHelper.Log("Request Fire");
-                bulletSpawner.FireServerRPC();
             }
         }
         
@@ -167,5 +185,6 @@ public class Player : NetworkBehaviour
 
         return moveVect;
     }
+
 
 }
