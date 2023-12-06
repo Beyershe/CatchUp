@@ -42,7 +42,7 @@ public class NetworkHandler : NetworkBehaviour
         NetworkManager.OnClientConnectedCallback += ClientOnClientConnected;
         NetworkManager.OnClientDisconnectCallback += ClientOnClientDisconnected;
         NetworkManager.OnClientStopped += ClientOnClientStopped;
-        PrintMe();
+        //PrintMe();
     }
     private void ClientOnClientStopped(bool indicator)
     {
@@ -50,7 +50,7 @@ public class NetworkHandler : NetworkBehaviour
         NetworkManager.OnClientConnectedCallback -= ClientOnClientConnected;
         NetworkManager.OnClientDisconnectCallback -= ClientOnClientDisconnected;
         NetworkManager.OnClientStopped -= ClientOnClientStopped;
-        PrintMe();
+        //PrintMe();
     }
     private void ClientOnClientConnected(ulong clientId)
     {
@@ -69,7 +69,7 @@ public class NetworkHandler : NetworkBehaviour
         NetworkManager.OnClientConnectedCallback += ServerOnClientConnected;
         NetworkManager.OnClientDisconnectCallback += ServerOnClientDisconnected;
         NetworkManager.OnServerStopped += ServerOnServerStopped;
-        PrintMe();
+        //PrintMe();
     }
     private void ServerOnServerStopped(bool indicator)
     {
@@ -77,7 +77,7 @@ public class NetworkHandler : NetworkBehaviour
         NetworkManager.OnClientConnectedCallback -= ServerOnClientConnected;
         NetworkManager.OnClientDisconnectCallback -= ServerOnClientDisconnected;
         NetworkManager.OnServerStopped -= ServerOnServerStopped;
-        PrintMe();
+        //PrintMe();
     }
     private void ServerOnClientConnected(ulong clientId)
     {

@@ -15,7 +15,7 @@ public struct NetworkPlayerInfo : INetworkSerializable, System.IEquatable<Networ
     {
         clientId = id;
         ready = false;
-        color = Color.magenta;
+        color = Color.green;
         playerName = "Not Set";
     }
 

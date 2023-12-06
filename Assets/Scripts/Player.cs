@@ -10,7 +10,7 @@ public class Player : NetworkBehaviour
 {
     public float movementSpeed = 50f;
     public float rotationSpeed = 130f;
-    public NetworkVariable<Color> PlayerColor = new NetworkVariable<Color>(Color.red);
+    public NetworkVariable<Color> PlayerColor = new NetworkVariable<Color>(Color.green);
     public BulletSpawner bulletSpawner;
     public NetworkVariable<int> ScoreNetVar = new NetworkVariable<int>(0);
     public NetworkVariable<int> playerHP = new NetworkVariable<int>();
@@ -88,6 +88,15 @@ public class Player : NetworkBehaviour
 
             NetworkManager.Singleton.ConnectedClients[other.GetComponent<NetworkObject>().OwnerClientId].PlayerObject.GetComponent<NetwrokPlayerData>().score.Value += 1;
             playerHP.Value -= 10;
+            if(playerHP.Value <= 0)
+            {
+                Debug.Log("Dead");
+                playerBody.GetComponent<MeshRenderer>().material.color = Color.grey;
+                movementSpeed = 0;
+                rotationSpeed = 0;
+                bulletSpawner.enabled = false;
+
+            }
         }
         else if(other.GetComponent<HealthPickup>())
         {
@@ -116,10 +125,6 @@ public class Player : NetworkBehaviour
         if(IsOwner) 
         {
             OwnerHandleInput();
-            if (Input.GetButtonDown("Fire1"))
-            {
-                NetworkHelper.Log("Request Fire");
-            }
         }
         
     }

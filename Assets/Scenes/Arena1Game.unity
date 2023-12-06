@@ -583,7 +583,7 @@ PrefabInstance:
     - target: {fileID: 1090906159072333277, guid: 9bfac1dc833668749848e30e7560e649, type: 3}
       propertyPath: powerUp
       value: 
-      objectReference: {fileID: -8033841372388730256, guid: c428294be5807c449a706976038b8b1f, type: 3}
+      objectReference: {fileID: 1059992683571128099, guid: 79c9f02823d22304c8afa35f67c304ae, type: 3}
     - target: {fileID: 1098178385916805274, guid: 9bfac1dc833668749848e30e7560e649, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1873202121
@@ -3500,7 +3500,7 @@ PrefabInstance:
     - target: {fileID: 1090906159072333277, guid: 9bfac1dc833668749848e30e7560e649, type: 3}
       propertyPath: powerUp
       value: 
-      objectReference: {fileID: -8033841372388730256, guid: c428294be5807c449a706976038b8b1f, type: 3}
+      objectReference: {fileID: 1059992683571128099, guid: 79c9f02823d22304c8afa35f67c304ae, type: 3}
     - target: {fileID: 1098178385916805274, guid: 9bfac1dc833668749848e30e7560e649, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 4129280756
@@ -6149,6 +6149,10 @@ PrefabInstance:
     - target: {fileID: 8458955761857192560, guid: 8c924c3e3a859a447b9507d25c85d1f3, type: 3}
       propertyPath: m_Name
       value: ScoreBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458955761857192560, guid: 8c924c3e3a859a447b9507d25c85d1f3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8629826267999613281, guid: 8c924c3e3a859a447b9507d25c85d1f3, type: 3}
       propertyPath: m_Sprite
